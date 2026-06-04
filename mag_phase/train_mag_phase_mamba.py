@@ -43,6 +43,27 @@ LR = 1e-4
 CHECKPOINT_EVERY = 500
 # =========================
 
+# =========================
+# Augmentation config
+# =========================
+AUG_GAIN_PROB = 0.8
+AUG_GAIN_MIN = 0.7
+AUG_GAIN_MAX = 1.3
+
+AUG_NOISE_PROB = 0.6
+AUG_NOISE_STD_MIN = 0.0005
+AUG_NOISE_STD_MAX = 0.01
+
+AUG_POLARITY_FLIP_PROB = 0.15
+
+AUG_TIME_SHIFT_PROB = 0.3
+AUG_TIME_SHIFT_MAX_SAMPLES = 1600   # 0.1 sec at 16k
+
+AUG_LOWPASS_PROB = 0.25
+AUG_HIGHPASS_PROB = 0.25
+AUG_EQ_PROB = 0.35
+# =========================
+
 
 def random_or_center_crop(wav: torch.Tensor, target_len: int = 32000, train: bool = True) -> torch.Tensor:
     length = wav.shape[0]
@@ -59,6 +80,91 @@ def random_or_center_crop(wav: torch.Tensor, target_len: int = 32000, train: boo
 
     repeats = math.ceil(target_len / length)
     wav = wav.repeat(repeats)[:target_len]
+    return wav
+
+
+def apply_lowpass(wav: torch.Tensor, sample_rate: int) -> torch.Tensor:
+    cutoff = random.uniform(2500.0, 7000.0)
+    return torchaudio.functional.lowpass_biquad(wav, sample_rate, cutoff)
+
+
+def apply_highpass(wav: torch.Tensor, sample_rate: int) -> torch.Tensor:
+    cutoff = random.uniform(40.0, 1200.0)
+    return torchaudio.functional.highpass_biquad(wav, sample_rate, cutoff)
+
+
+def apply_random_eq(wav: torch.Tensor, sample_rate: int) -> torch.Tensor:
+    """
+    Simple EQ-style augmentation:
+    random low shelf / high shelf-ish behavior using treble+bass style biquads.
+    """
+    mode = random.choice(["bass", "treble", "peaking"])
+
+    if mode == "bass":
+        gain_db = random.uniform(-8.0, 8.0)
+        cutoff = random.uniform(80.0, 400.0)
+        q = random.uniform(0.5, 1.2)
+        return torchaudio.functional.bass_biquad(
+            wav,
+            sample_rate=sample_rate,
+            gain=gain_db,
+            central_freq=cutoff,
+            Q=q,
+        )
+
+    if mode == "treble":
+        gain_db = random.uniform(-8.0, 8.0)
+        cutoff = random.uniform(2500.0, 6000.0)
+        q = random.uniform(0.5, 1.2)
+        return torchaudio.functional.treble_biquad(
+            wav,
+            sample_rate=sample_rate,
+            gain=gain_db,
+            central_freq=cutoff,
+            Q=q,
+        )
+
+    # peaking eq
+    gain_db = random.uniform(-8.0, 8.0)
+    center_freq = random.uniform(300.0, 5000.0)
+    q = random.uniform(0.4, 1.5)
+    return torchaudio.functional.equalizer_biquad(
+        wav,
+        sample_rate=sample_rate,
+        center_freq=center_freq,
+        gain=gain_db,
+        Q=q,
+    )
+
+
+def apply_augmentations(wav: torch.Tensor, sample_rate: int) -> torch.Tensor:
+    if random.random() < AUG_GAIN_PROB:
+        gain = random.uniform(AUG_GAIN_MIN, AUG_GAIN_MAX)
+        wav = wav * gain
+
+    if random.random() < AUG_POLARITY_FLIP_PROB:
+        wav = -wav
+
+    if random.random() < AUG_TIME_SHIFT_PROB:
+        shift = random.randint(-AUG_TIME_SHIFT_MAX_SAMPLES, AUG_TIME_SHIFT_MAX_SAMPLES)
+        if shift != 0:
+            wav = torch.roll(wav, shifts=shift, dims=0)
+
+    if random.random() < AUG_LOWPASS_PROB:
+        wav = apply_lowpass(wav, sample_rate)
+
+    if random.random() < AUG_HIGHPASS_PROB:
+        wav = apply_highpass(wav, sample_rate)
+
+    if random.random() < AUG_EQ_PROB:
+        wav = apply_random_eq(wav, sample_rate)
+
+    if random.random() < AUG_NOISE_PROB:
+        noise_std = random.uniform(AUG_NOISE_STD_MIN, AUG_NOISE_STD_MAX)
+        noise = torch.randn_like(wav) * noise_std
+        wav = wav + noise
+
+    wav = torch.clamp(wav, -1.0, 1.0)
     return wav
 
 
@@ -108,6 +214,9 @@ class ATADDDataset(Dataset):
 
         wav = random_or_center_crop(wav, self.target_len, train=self.train)
 
+        if self.train:
+            wav = apply_augmentations(wav, self.target_sr)
+
         label = 0 if item["label"] == "real" else 1
         return wav, torch.tensor(label, dtype=torch.float32)
 
@@ -122,10 +231,10 @@ def evaluate(model, loader, device, criterion):
 
     with torch.no_grad():
         for x, y in loader:
-            x = x.to(device)
-            y = y.to(device)
+            x = x.to(device, non_blocking=True)
+            y = y.to(device, non_blocking=True)
 
-            logits = model(x)  # [B]
+            logits = model(x)
             loss = criterion(logits, y)
             total_loss += loss.item()
 
@@ -172,6 +281,12 @@ def main():
     print("VAL_LABEL_CSV:", VAL_LABEL_CSV)
     print("TRAIN_AUDIO_DIR:", TRAIN_AUDIO_DIR)
     print("VAL_AUDIO_DIR:", VAL_AUDIO_DIR)
+
+    print("AUG_GAIN_PROB:", AUG_GAIN_PROB)
+    print("AUG_NOISE_PROB:", AUG_NOISE_PROB)
+    print("AUG_LOWPASS_PROB:", AUG_LOWPASS_PROB)
+    print("AUG_HIGHPASS_PROB:", AUG_HIGHPASS_PROB)
+    print("AUG_EQ_PROB:", AUG_EQ_PROB)
 
     train_ds = ATADDDataset(
         csv_path=TRAIN_LABEL_CSV,
@@ -220,6 +335,7 @@ def main():
         batch_size=TRAIN_BATCH_SIZE,
         sampler=train_sampler,
         num_workers=NUM_WORKERS,
+        pin_memory=True,
     )
 
     val_loader = DataLoader(
@@ -227,6 +343,7 @@ def main():
         batch_size=VAL_BATCH_SIZE,
         shuffle=False,
         num_workers=NUM_WORKERS,
+        pin_memory=True,
     )
 
     model = MagPhaseMambaClassifier(
@@ -241,7 +358,6 @@ def main():
         dropout=0.2,
     ).to(device)
 
-    # stronger weight on real class, like before
     pos_weight = torch.tensor([1.0], dtype=torch.float32).to(device)
     criterion = nn.BCEWithLogitsLoss(pos_weight=pos_weight)
 
@@ -267,10 +383,10 @@ def main():
         total_train_loss = 0.0
 
         for batch_idx, (x, y) in enumerate(train_loader):
-            x = x.to(device)
-            y = y.to(device)
+            x = x.to(device, non_blocking=True)
+            y = y.to(device, non_blocking=True)
 
-            logits = model(x)  # [B]
+            logits = model(x)
             loss = criterion(logits, y)
 
             optimizer.zero_grad()
