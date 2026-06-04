@@ -1,0 +1,301 @@
+device: cuda
+TRAIN_LABEL_CSV: /s3_ml_data/ahovsepyan/AT-ADD-Track1/label/train.csv
+VAL_LABEL_CSV: /s3_ml_data/ahovsepyan/AT-ADD-Track1/label/dev.csv
+TRAIN_AUDIO_DIR: /s3_ml_data/ahovsepyan/AT-ADD-Track1/train
+VAL_AUDIO_DIR: /s3_ml_data/ahovsepyan/AT-ADD-Track1/dev
+AUG_GAIN_PROB: 0.8
+AUG_NOISE_PROB: 0.6
+AUG_LOWPASS_PROB: 0.25
+AUG_HIGHPASS_PROB: 0.25
+AUG_EQ_PROB: 0.35
+/s3_ml_data/ahovsepyan/AT-ADD-Track1/train: found 49575 usable files from /s3_ml_data/ahovsepyan/AT-ADD-Track1/label/train.csv
+class_count_real: 9999
+class_count_fake: 39576
+/s3_ml_data/ahovsepyan/AT-ADD-Track1/dev: found 49734 usable files from /s3_ml_data/ahovsepyan/AT-ADD-Track1/label/dev.csv
+Starting training from scratch
+epoch 1 | batch 0/3099 | loss=0.7165
+epoch 1 | batch 200/3099 | loss=0.6135
+epoch 1 | batch 400/3099 | loss=0.5741
+saved checkpoint at global_step 500 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 1 | batch 600/3099 | loss=0.4186
+epoch 1 | batch 800/3099 | loss=0.7997
+saved checkpoint at global_step 1000 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 1 | batch 1000/3099 | loss=0.5352
+epoch 1 | batch 1200/3099 | loss=0.4881
+epoch 1 | batch 1400/3099 | loss=0.3929
+saved checkpoint at global_step 1500 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 1 | batch 1600/3099 | loss=0.4480
+epoch 1 | batch 1800/3099 | loss=0.5255
+saved checkpoint at global_step 2000 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 1 | batch 2000/3099 | loss=0.4328
+epoch 1 | batch 2200/3099 | loss=0.4530
+epoch 1 | batch 2400/3099 | loss=0.4176
+saved checkpoint at global_step 2500 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 1 | batch 2600/3099 | loss=0.7289
+epoch 1 | batch 2800/3099 | loss=0.4595
+saved checkpoint at global_step 3000 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 1 | batch 3000/3099 | loss=0.4012
+Epoch 1/20 | train_loss=0.4965 | val_loss=0.3723 | val_acc=0.8340 | val_f1_real=0.6971 | val_f1_fake=0.8856 | val_macro_f1=0.7914 | val_precision_real=0.5505 | val_recall_real=0.9502 | val_precision_fake=0.9847 | val_recall_fake=0.8047
+val_confusion_matrix:
+[[ 9502   498]
+ [ 7760 31974]]
+saved best model to: /home3/aaovsepian/tiny_rawnet/best_model_mag_phase_mamba.pt
+saved end-of-epoch checkpoint to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 2 | batch 0/3099 | loss=0.2147
+epoch 2 | batch 200/3099 | loss=0.4717
+epoch 2 | batch 400/3099 | loss=0.6845
+saved checkpoint at global_step 3500 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 2 | batch 600/3099 | loss=0.3440
+epoch 2 | batch 800/3099 | loss=0.4231
+saved checkpoint at global_step 4000 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 2 | batch 1000/3099 | loss=0.2503
+epoch 2 | batch 1200/3099 | loss=0.2622
+epoch 2 | batch 1400/3099 | loss=0.3226
+saved checkpoint at global_step 4500 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 2 | batch 1600/3099 | loss=0.3969
+epoch 2 | batch 1800/3099 | loss=0.4220
+saved checkpoint at global_step 5000 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 2 | batch 2000/3099 | loss=0.4160
+epoch 2 | batch 2200/3099 | loss=0.5024
+epoch 2 | batch 2400/3099 | loss=0.4684
+saved checkpoint at global_step 5500 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 2 | batch 2600/3099 | loss=0.4817
+epoch 2 | batch 2800/3099 | loss=0.4421
+saved checkpoint at global_step 6000 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 2 | batch 3000/3099 | loss=0.3765
+Epoch 2/20 | train_loss=0.3600 | val_loss=0.6441 | val_acc=0.7369 | val_f1_real=0.6019 | val_f1_fake=0.8035 | val_macro_f1=0.7027 | val_precision_real=0.4325 | val_recall_real=0.9894 | val_precision_fake=0.9961 | val_recall_fake=0.6733
+val_confusion_matrix:
+[[ 9894   106]
+ [12980 26754]]
+saved end-of-epoch checkpoint to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 3 | batch 0/3099 | loss=0.4490
+epoch 3 | batch 200/3099 | loss=0.3736
+saved checkpoint at global_step 6500 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 3 | batch 400/3099 | loss=0.1766
+epoch 3 | batch 600/3099 | loss=0.4347
+epoch 3 | batch 800/3099 | loss=0.2900
+saved checkpoint at global_step 7000 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 3 | batch 1000/3099 | loss=0.3147
+epoch 3 | batch 1200/3099 | loss=0.1923
+saved checkpoint at global_step 7500 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 3 | batch 1400/3099 | loss=0.2262
+epoch 3 | batch 1600/3099 | loss=0.3488
+epoch 3 | batch 1800/3099 | loss=0.1846
+saved checkpoint at global_step 8000 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 3 | batch 2000/3099 | loss=0.3292
+epoch 3 | batch 2200/3099 | loss=0.2888
+saved checkpoint at global_step 8500 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 3 | batch 2400/3099 | loss=0.3446
+epoch 3 | batch 2600/3099 | loss=0.3814
+epoch 3 | batch 2800/3099 | loss=0.2506
+saved checkpoint at global_step 9000 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 3 | batch 3000/3099 | loss=0.5336
+Epoch 3/20 | train_loss=0.3155 | val_loss=0.1723 | val_acc=0.9264 | val_f1_real=0.8076 | val_f1_fake=0.9545 | val_macro_f1=0.8811 | val_precision_real=0.8512 | val_recall_real=0.7683 | val_precision_fake=0.9431 | val_recall_fake=0.9662
+val_confusion_matrix:
+[[ 7683  2317]
+ [ 1343 38391]]
+saved best model to: /home3/aaovsepian/tiny_rawnet/best_model_mag_phase_mamba.pt
+saved end-of-epoch checkpoint to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 4 | batch 0/3099 | loss=0.1164
+epoch 4 | batch 200/3099 | loss=0.4220
+saved checkpoint at global_step 9500 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 4 | batch 400/3099 | loss=0.1713
+epoch 4 | batch 600/3099 | loss=0.2779
+saved checkpoint at global_step 10000 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 4 | batch 800/3099 | loss=0.4160
+epoch 4 | batch 1000/3099 | loss=0.1806
+epoch 4 | batch 1200/3099 | loss=0.1716
+saved checkpoint at global_step 10500 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 4 | batch 1400/3099 | loss=0.1576
+epoch 4 | batch 1600/3099 | loss=0.1905
+saved checkpoint at global_step 11000 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 4 | batch 1800/3099 | loss=0.3962
+epoch 4 | batch 2000/3099 | loss=0.2347
+epoch 4 | batch 2200/3099 | loss=0.2570
+saved checkpoint at global_step 11500 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 4 | batch 2400/3099 | loss=0.3073
+epoch 4 | batch 2600/3099 | loss=0.4945
+saved checkpoint at global_step 12000 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 4 | batch 2800/3099 | loss=0.3299
+epoch 4 | batch 3000/3099 | loss=0.4310
+Epoch 4/20 | train_loss=0.2864 | val_loss=0.4946 | val_acc=0.8021 | val_f1_real=0.6669 | val_f1_fake=0.8593 | val_macro_f1=0.7631 | val_precision_real=0.5041 | val_recall_real=0.9851 | val_precision_fake=0.9951 | val_recall_fake=0.7561
+val_confusion_matrix:
+[[ 9851   149]
+ [ 9692 30042]]
+saved end-of-epoch checkpoint to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 5 | batch 0/3099 | loss=0.1406
+saved checkpoint at global_step 12500 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 5 | batch 200/3099 | loss=0.2274
+epoch 5 | batch 400/3099 | loss=0.4240
+epoch 5 | batch 600/3099 | loss=0.1269
+saved checkpoint at global_step 13000 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 5 | batch 800/3099 | loss=0.4983
+epoch 5 | batch 1000/3099 | loss=0.5103
+saved checkpoint at global_step 13500 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 5 | batch 1200/3099 | loss=0.3157
+epoch 5 | batch 1400/3099 | loss=0.2667
+epoch 5 | batch 1600/3099 | loss=0.1420
+saved checkpoint at global_step 14000 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 5 | batch 1800/3099 | loss=0.0931
+epoch 5 | batch 2000/3099 | loss=0.2122
+saved checkpoint at global_step 14500 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 5 | batch 2200/3099 | loss=0.1825
+epoch 5 | batch 2400/3099 | loss=0.1147
+epoch 5 | batch 2600/3099 | loss=0.2085
+saved checkpoint at global_step 15000 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 5 | batch 2800/3099 | loss=0.2189
+epoch 5 | batch 3000/3099 | loss=0.2604
+Epoch 5/20 | train_loss=0.2629 | val_loss=0.1295 | val_acc=0.9456 | val_f1_real=0.8566 | val_f1_fake=0.9664 | val_macro_f1=0.9115 | val_precision_real=0.9114 | val_recall_real=0.8079 | val_precision_fake=0.9530 | val_recall_fake=0.9802
+val_confusion_matrix:
+[[ 8079  1921]
+ [  785 38949]]
+saved best model to: /home3/aaovsepian/tiny_rawnet/best_model_mag_phase_mamba.pt
+saved end-of-epoch checkpoint to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 6 | batch 0/3099 | loss=0.2851
+saved checkpoint at global_step 15500 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 6 | batch 200/3099 | loss=0.1103
+epoch 6 | batch 400/3099 | loss=0.3021
+saved checkpoint at global_step 16000 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 6 | batch 600/3099 | loss=0.3453
+epoch 6 | batch 800/3099 | loss=0.4766
+epoch 6 | batch 1000/3099 | loss=0.4855
+saved checkpoint at global_step 16500 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 6 | batch 1200/3099 | loss=0.0453
+epoch 6 | batch 1400/3099 | loss=0.4343
+saved checkpoint at global_step 17000 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 6 | batch 1600/3099 | loss=0.1741
+epoch 6 | batch 1800/3099 | loss=0.4230
+epoch 6 | batch 2000/3099 | loss=0.3765
+saved checkpoint at global_step 17500 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 6 | batch 2200/3099 | loss=0.3006
+epoch 6 | batch 2400/3099 | loss=0.3522
+saved checkpoint at global_step 18000 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 6 | batch 2600/3099 | loss=0.1844
+epoch 6 | batch 2800/3099 | loss=0.1805
+epoch 6 | batch 3000/3099 | loss=0.1914
+saved checkpoint at global_step 18500 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+Epoch 6/20 | train_loss=0.2440 | val_loss=0.1137 | val_acc=0.9550 | val_f1_real=0.8931 | val_f1_fake=0.9715 | val_macro_f1=0.9323 | val_precision_real=0.8555 | val_recall_real=0.9341 | val_precision_fake=0.9830 | val_recall_fake=0.9603
+val_confusion_matrix:
+[[ 9341   659]
+ [ 1578 38156]]
+saved best model to: /home3/aaovsepian/tiny_rawnet/best_model_mag_phase_mamba.pt
+saved end-of-epoch checkpoint to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 7 | batch 0/3099 | loss=0.4557
+epoch 7 | batch 200/3099 | loss=0.4563
+epoch 7 | batch 400/3099 | loss=0.2941
+saved checkpoint at global_step 19000 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 7 | batch 600/3099 | loss=0.2229
+epoch 7 | batch 800/3099 | loss=0.1478
+saved checkpoint at global_step 19500 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 7 | batch 1000/3099 | loss=0.9116
+epoch 7 | batch 1200/3099 | loss=0.1919
+epoch 7 | batch 1400/3099 | loss=0.1230
+saved checkpoint at global_step 20000 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 7 | batch 1600/3099 | loss=0.1654
+epoch 7 | batch 1800/3099 | loss=0.2202
+saved checkpoint at global_step 20500 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 7 | batch 2000/3099 | loss=0.1425
+epoch 7 | batch 2200/3099 | loss=0.3436
+epoch 7 | batch 2400/3099 | loss=0.2085
+saved checkpoint at global_step 21000 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 7 | batch 2600/3099 | loss=0.3445
+epoch 7 | batch 2800/3099 | loss=0.0870
+saved checkpoint at global_step 21500 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 7 | batch 3000/3099 | loss=0.4382
+Epoch 7/20 | train_loss=0.2267 | val_loss=0.2461 | val_acc=0.9047 | val_f1_real=0.8066 | val_f1_fake=0.9368 | val_macro_f1=0.8717 | val_precision_real=0.6812 | val_recall_real=0.9885 | val_precision_fake=0.9967 | val_recall_fake=0.8836
+val_confusion_matrix:
+[[ 9885   115]
+ [ 4626 35108]]
+saved end-of-epoch checkpoint to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 8 | batch 0/3099 | loss=0.3450
+epoch 8 | batch 200/3099 | loss=0.0700
+saved checkpoint at global_step 22000 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 8 | batch 400/3099 | loss=0.4000
+epoch 8 | batch 600/3099 | loss=0.2182
+epoch 8 | batch 800/3099 | loss=0.6545
+saved checkpoint at global_step 22500 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 8 | batch 1000/3099 | loss=0.1158
+epoch 8 | batch 1200/3099 | loss=0.2930
+saved checkpoint at global_step 23000 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 8 | batch 1400/3099 | loss=0.1932
+epoch 8 | batch 1600/3099 | loss=0.6319
+epoch 8 | batch 1800/3099 | loss=0.2524
+saved checkpoint at global_step 23500 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 8 | batch 2000/3099 | loss=0.0504
+epoch 8 | batch 2200/3099 | loss=0.1885
+saved checkpoint at global_step 24000 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 8 | batch 2400/3099 | loss=0.1362
+epoch 8 | batch 2600/3099 | loss=0.0942
+epoch 8 | batch 2800/3099 | loss=0.1716
+saved checkpoint at global_step 24500 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 8 | batch 3000/3099 | loss=0.1173
+Epoch 8/20 | train_loss=0.2130 | val_loss=0.1148 | val_acc=0.9542 | val_f1_real=0.8840 | val_f1_fake=0.9715 | val_macro_f1=0.9277 | val_precision_real=0.9009 | val_recall_real=0.8676 | val_precision_fake=0.9670 | val_recall_fake=0.9760
+val_confusion_matrix:
+[[ 8676  1324]
+ [  954 38780]]
+saved end-of-epoch checkpoint to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 9 | batch 0/3099 | loss=0.3883
+epoch 9 | batch 200/3099 | loss=0.2200
+saved checkpoint at global_step 25000 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 9 | batch 400/3099 | loss=0.2071
+epoch 9 | batch 600/3099 | loss=0.0738
+saved checkpoint at global_step 25500 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 9 | batch 800/3099 | loss=0.1448
+epoch 9 | batch 1000/3099 | loss=0.3448
+epoch 9 | batch 1200/3099 | loss=0.0829
+saved checkpoint at global_step 26000 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 9 | batch 1400/3099 | loss=0.0243
+epoch 9 | batch 1600/3099 | loss=0.2147
+saved checkpoint at global_step 26500 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 9 | batch 1800/3099 | loss=0.0830
+epoch 9 | batch 2000/3099 | loss=0.4164
+epoch 9 | batch 2200/3099 | loss=0.6994
+saved checkpoint at global_step 27000 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 9 | batch 2400/3099 | loss=0.1441
+epoch 9 | batch 2600/3099 | loss=0.1158
+saved checkpoint at global_step 27500 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 9 | batch 2800/3099 | loss=0.1012
+epoch 9 | batch 3000/3099 | loss=0.1916
+Epoch 9/20 | train_loss=0.2042 | val_loss=0.1696 | val_acc=0.9368 | val_f1_real=0.8617 | val_f1_fake=0.9591 | val_macro_f1=0.9104 | val_precision_real=0.7696 | val_recall_real=0.9788 | val_precision_fake=0.9943 | val_recall_fake=0.9263
+val_confusion_matrix:
+[[ 9788   212]
+ [ 2930 36804]]
+saved end-of-epoch checkpoint to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 10 | batch 0/3099 | loss=0.1205
+saved checkpoint at global_step 28000 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 10 | batch 200/3099 | loss=0.0346
+epoch 10 | batch 400/3099 | loss=0.1101
+epoch 10 | batch 600/3099 | loss=0.1177
+saved checkpoint at global_step 28500 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 10 | batch 800/3099 | loss=0.1037
+epoch 10 | batch 1000/3099 | loss=0.2158
+saved checkpoint at global_step 29000 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 10 | batch 1200/3099 | loss=0.1932
+epoch 10 | batch 1400/3099 | loss=0.1119
+epoch 10 | batch 1600/3099 | loss=0.0693
+saved checkpoint at global_step 29500 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 10 | batch 1800/3099 | loss=0.1777
+epoch 10 | batch 2000/3099 | loss=0.3932
+saved checkpoint at global_step 30000 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 10 | batch 2200/3099 | loss=0.1702
+epoch 10 | batch 2400/3099 | loss=0.1726
+epoch 10 | batch 2600/3099 | loss=0.5723
+saved checkpoint at global_step 30500 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 10 | batch 2800/3099 | loss=0.2831
+epoch 10 | batch 3000/3099 | loss=0.0857
+Epoch 10/20 | train_loss=0.1926 | val_loss=0.1075 | val_acc=0.9561 | val_f1_real=0.8828 | val_f1_fake=0.9730 | val_macro_f1=0.9279 | val_precision_real=0.9543 | val_recall_real=0.8212 | val_precision_fake=0.9565 | val_recall_fake=0.9901
+val_confusion_matrix:
+[[ 8212  1788]
+ [  393 39341]]
+saved end-of-epoch checkpoint to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 11 | batch 0/3099 | loss=0.0726
+saved checkpoint at global_step 31000 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 11 | batch 200/3099 | loss=0.0619
+epoch 11 | batch 400/3099 | loss=0.0605
+saved checkpoint at global_step 31500 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 11 | batch 600/3099 | loss=0.1092
+epoch 11 | batch 800/3099 | loss=0.4491
+epoch 11 | batch 1000/3099 | loss=0.0345
+saved checkpoint at global_step 32000 to: /home3/aaovsepian/tiny_rawnet/last_checkpoint_mag_phase_mamba.pt
+epoch 11 | batch 1200/3099 | loss=0.2612
+slurmstepd-jupyterhub-slurm-node1: error: *** JOB 3249 ON jupyterhub-slurm-node1 CANCELLED AT 2026-06-04T14:15:29 DUE TO TIME LIMIT ***
